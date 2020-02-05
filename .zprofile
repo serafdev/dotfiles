@@ -22,6 +22,18 @@ do
 done
 
 # Python stuff
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PATH:$PYENV_ROOT/bin
 alias python=python3
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+
+declare -a cmds_init=(
+    "pyenv init"
+    "pyenv virtualenv-init"
+)
+
+for cmd_init in "${cmds_init[@]}"
+do
+    if command -v $cmd_init 1>/dev/null 2>&1; then
+        eval $($cmd_init -)
+    fi
+done
