@@ -5,7 +5,6 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-alias python=python3
 alias ll=ls -l
 
 declare -a work_profiles=(
@@ -22,3 +21,7 @@ do
     fi
 done
 
+# Python stuff
+alias python=python3
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
