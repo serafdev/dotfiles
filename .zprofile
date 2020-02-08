@@ -5,7 +5,7 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-alias ll=ls -l
+alias ll="ls -l"
 
 declare -a work_profiles=(
     ".gcpprofile"
