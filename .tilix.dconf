@@ -1,0 +1,15 @@
+# To load this configuration back into dconf, do:
+# dconf load /com/gexperts/Tilix/ < .tilix.dconf
+
+[/]
+quake-specific-monitor=0
+terminal-title-style='small'
+theme-variant='dark'
+window-style='borderless'
+
+[keybindings]
+app-preferences='<Primary><Shift>p'
+
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+login-shell=true
+visible-name='Default'
