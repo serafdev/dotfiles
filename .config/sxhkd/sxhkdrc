@@ -132,3 +132,7 @@ super + {Left,Down,Up,Right}
 # Run emacs
 super + ctrl + e
   emacs
+
+# Back light controls
+super + alt + {Up,Down}
+  light {-A,-U} 5
