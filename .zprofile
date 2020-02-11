@@ -17,7 +17,7 @@ declare -a work_profiles=(
 for profile in "${work_profiles[@]}"
 do
     if [ -f $HOME/$profile ]; then
-        source $profile
+        source $HOME/$profile
     fi
 done
 
@@ -34,6 +34,6 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte.sh
 fi
 
-if [ uname~="Linux" ] && systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+if [ uname = "Linux" ] && systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
     startx
 fi
