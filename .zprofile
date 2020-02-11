@@ -37,3 +37,6 @@ fi
 if [ uname = "Linux" ] && systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
     startx
 fi
+
+# Git stuff
+git config --global core.editor "emacs -nw"
