@@ -6,7 +6,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 alias ll="ls -l"
-
+alias cat=bat
 declare -a work_profiles=(
     ".gcpprofile"
     ".azureprofile"
