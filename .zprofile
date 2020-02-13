@@ -12,6 +12,7 @@ declare -a work_profiles=(
     ".azureprofile"
     ".edoxaprofile"
     ".bellprofile"
+    ".gokuprofile"
 )
 
 for profile in "${work_profiles[@]}"
@@ -40,3 +41,9 @@ fi
 
 # Git stuff
 git config --global core.editor "emacs -nw"
+
+# Add fancy colors to zsh
+if [ ! -d "$HOME/.zsh-syntax-highlighting" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.zsh-syntax-highlighting
+fi
+source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
