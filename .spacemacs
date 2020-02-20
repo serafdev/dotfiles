@@ -42,7 +42,8 @@ This function should only modify configuration layer settings."
      (go :variables
          go-format-before-save t
          go-use-golangci-lint t
-         go-backend 'lsp)
+         go-backend 'lsp
+         go-use-test-args "-race -timeout 10s")
      helm
      html
      imenu-list
@@ -57,7 +58,7 @@ This function should only modify configuration layer settings."
           jiralib-url (getenv "JIRA_URL"))
      protobuf
      (python :variables
-             python-fill-column 79
+             python-fill-column 120 
              python-formatter 'black
              python-format-on-save t)
      react
@@ -445,7 +446,7 @@ It should only modify the values of Spacemacs settings."
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup "changed"
 
    ;; Either nil or a number of seconds. If non-nil zone out after the specified
    ;; number of seconds. (default nil)
@@ -454,7 +455,11 @@ It should only modify the values of Spacemacs settings."
    ;; Run `spacemacs/prettify-org-buffer' when
    ;; visiting README.org files of Spacemacs.
    ;; (default nil)
-   dotspacemacs-pretty-docs nil))
+   dotspacemacs-pretty-docs nil
+
+   ;; If nil, will display the release notes.
+   spacemacs-buffer--release-note-version t
+   ))
 
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
