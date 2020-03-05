@@ -496,6 +496,8 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq neo-theme 'nerd)
+  (setq mac-option-modifier nil)
+  (setq mac-command-modifier 'meta)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
