@@ -6,6 +6,9 @@ export PATH=$PATH:$HOME/.local/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+# MacPorts
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+
 alias ll="ls -l"
 alias cat=bat
 declare -a work_profiles=(
