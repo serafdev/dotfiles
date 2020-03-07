@@ -9,7 +9,8 @@ super + Return
 
 # program launcher
 super + @space
-	dmenu_run
+  rofi -show run
+	#dmenu_run
 
 # Look at hotkkeys
 super + F1
@@ -135,4 +136,4 @@ super + ctrl + e
 
 # Back light controls
 super + alt + {Up,Down}
-  light {-A,-U} 5
+  light {-A,-U} 0.5 

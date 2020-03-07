@@ -2,6 +2,7 @@ ZSH_THEME="evan"
 
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/.local/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
@@ -21,6 +22,8 @@ do
         source $HOME/$profile
     fi
 done
+
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Python stuff
 export PYENV_ROOT=$HOME/.pyenv
@@ -47,3 +50,8 @@ if [ ! -d "$HOME/.zsh-syntax-highlighting" ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.zsh-syntax-highlighting
 fi
 source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Ruby stuff
+if hash ruby 2>/dev/null; then
+    PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+fi
