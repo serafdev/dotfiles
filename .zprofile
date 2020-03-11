@@ -50,3 +50,16 @@ if [ ! -d "$HOME/.zsh-syntax-highlighting" ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.zsh-syntax-highlighting
 fi
 source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Stuff for npm without sudo
+if [[ ! -d "${HOME}/.npm-packages" ]]; then
+       mkdir "${HOME}/.npm-packages"
+fi
+npm config set prefix "${HOME}/.npm-packages"
+NPM_PACKAGES="${HOME}/.npm-packages"
+
+export PATH="$PATH:$NPM_PACKAGES/bin"
+
+# Preserve MANPATH if you already defined it somewhere in your config.
+# Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
