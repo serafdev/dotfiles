@@ -2,6 +2,7 @@ ZSH_THEME="evan"
 
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/.local/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
@@ -24,6 +25,8 @@ do
         source $HOME/$profile
     fi
 done
+
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Python stuff
 export PYENV_ROOT=$HOME/.pyenv
@@ -51,6 +54,7 @@ if [ ! -d "$HOME/.zsh-syntax-highlighting" ]; then
 fi
 source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+
 # Stuff for npm without sudo
 if [[ ! -d "${HOME}/.npm-packages" ]]; then
        mkdir "${HOME}/.npm-packages"
@@ -63,3 +67,9 @@ export PATH="$PATH:$NPM_PACKAGES/bin"
 # Preserve MANPATH if you already defined it somewhere in your config.
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
+
+# Ruby stuff
+if hash ruby 2>/dev/null; then
+    PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+fi
