@@ -73,3 +73,6 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 if hash ruby 2>/dev/null; then
     PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
 fi
+
+# Doom Path
+export PATH=$PATH:$HOME/.emacs.d/bin
