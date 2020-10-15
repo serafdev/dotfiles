@@ -1,0 +1,12 @@
+xterm*faceName: IBMPlexMono Light
+xterm*faceSize: 14
+xterm*background: Black
+xterm*foreground: grey
+xterm*VT100.Translations: #override \
+    Ctrl <Key> minus: smaller-vt-font() \n\
+    Ctrl <Key> plus: larger-vt-font() \n\
+    Ctrl <Key> 0: set-vt-font(d) \n\
+    Shift <KeyPress> Insert: insert-selection(CLIPBOARD) \n\
+    Ctrl <Key>P:    insert-selection(CLIPBOARD) \n\
+    Ctrl <Key>Y:    copy-selection(CLIPBOARD) \n\
+    Ctrl <Btn1Up>: exec-formatted("xdg-open '%t'", PRIMARY)
