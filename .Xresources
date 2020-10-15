@@ -1,3 +1,4 @@
+xterm*loginShell: true
 xterm*termName: xterm-256color
 
 xterm*faceName: IBMPlexMono Light
