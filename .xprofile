@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# cvt 2560 1440 144
+# xrandr --newmode "2560x1440_144.00" 3584  1440 1443 1448 1568 -hsync +vsync
+# xrandr --addmode HDMI-1-1 2560x1440_144.00
