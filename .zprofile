@@ -29,12 +29,7 @@ done
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Python stuff
-export PYENV_ROOT=$HOME/.pyenv
-export PATH=$PATH:$PYENV_ROOT/bin
 alias python=python3
-export PYENV_VIRTUALENV_VERBOSE_ACTIVATE=1
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 # Source vte.sh when using Tilix
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
