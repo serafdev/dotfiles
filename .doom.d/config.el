@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Fares Bessrour"
-      user-mail-address "fares@local.com")
+      user-mail-address "fares@local.dev")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -21,12 +21,12 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "IBMPlexMono" :size 16 :weight 'Light))
+(setq doom-font (font-spec :family "Input Mono" :size 14 :weight 'thin))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-solarized-dark)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -59,3 +59,8 @@
 ;; Centaur-Tabs Configuration
 ;; (setq centaur-tabs-set-bar 'over)
 ;; (setq centaur-tabs-show-navigation-buttons t)
+
+;; vterm config: https://github.com/akermu/emacs-libvterm
+(setq vterm-shell "/usr/local/bin/fish")
+
+(setq url-proxy-services '(("no_proxy" . "localhost")))
