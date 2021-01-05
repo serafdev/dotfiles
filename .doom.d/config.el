@@ -21,7 +21,8 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "IBMPlexMono" :size 16 :weight 'Light))
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 16 :weight 'Light))
+
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -64,3 +65,7 @@
 (setq vterm-shell "/usr/local/bin/fish")
 
 (setq url-proxy-services '(("no_proxy" . "localhost")))
+
+(add-to-list 'exec-path "$HOME/go/bin")
+
+;;;
