@@ -41,7 +41,7 @@ if [ uname = "Linux" ] && systemctl -q is-active graphical.target && [[ ! $DISPL
 fi
 
 # Git stuff
-git config --global core.editor "emacs -nw"
+git config --global core.editor "vim"
 
 # Add fancy colors to zsh
 if [ ! -d "$HOME/.zsh-syntax-highlighting" ]; then
