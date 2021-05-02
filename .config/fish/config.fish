@@ -19,4 +19,14 @@ alias t=terraform
 
 alias watch="watch -n 0.2 "
 
-. /home/seraf/Downloads/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.fish.inc
+# PATH
+set -gx PATH $PATH ~/bin
+set -gx PATH $PATH $HOME/.krew/bin
+set -gx PATH $PATH $HOME/.cargo/bin
+
+alias kev="oc get events --sort-by='.metadata.creationTimestamp'"
+alias kpr="kubectl get pods --field-selector=status.phase=Running"
+
+starship init fish | source
+
+alias python=python3
