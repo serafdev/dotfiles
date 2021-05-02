@@ -27,7 +27,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-solarized-dark)
+(setq doom-theme 'doom-one)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -62,10 +62,15 @@
 ;; (setq centaur-tabs-show-navigation-buttons t)
 
 ;; vterm config: https://github.com/akermu/emacs-libvterm
-(setq vterm-shell "/usr/local/bin/fish")
+(setq vterm-shell "/usr/bin/fish")
 
 (setq url-proxy-services '(("no_proxy" . "localhost")))
 
 (add-to-list 'exec-path "$HOME/go/bin")
 
 ;;;
+(setq exec-path (append exec-path '("/home/seraf/go/bin")))
+(setq exec-path (append exec-path '("/usr/local/go/bin")))
+
+(setenv "GOPATH" "/home/seraf/go")
+(setq-hook! 'web-mode-hook +format-with 'prettier-prettify)

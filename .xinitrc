@@ -35,4 +35,4 @@ fi
 xset +fp /home/seraf/.local/share/fonts
 xset fp rehash
 
-exec bspwm
+exec i3
