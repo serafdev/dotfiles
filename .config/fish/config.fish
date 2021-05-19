@@ -25,3 +25,12 @@ alias kpr="kubectl get pods --field-selector=status.phase=Running"
 starship init fish | source
 
 alias python=python3
+fish_add_path ~/.poetry/bin
+
+function zoomfix
+    xcompmgr -c -l0 -t0 -r0 -o.00
+end
+
+function brightness
+    xrandr --output (xrandr -q | grep ' connected' | head -n 1 | cut -d ' ' -f1) --brightness $argv[1]
+end

@@ -74,3 +74,5 @@
 
 (setenv "GOPATH" "/home/seraf/go")
 (setq-hook! 'web-mode-hook +format-with 'prettier-prettify)
+
+(menu-bar-mode -1)
