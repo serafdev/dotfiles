@@ -2,17 +2,18 @@ function on_exit --on-event fish_exit
     echo Exiting Fish...
 end
 
-set -gx GOPATH /go
-set -gx npm_config_prefix /.node_modules
+set -gx GOPATH ~/go
+set -gx npm_config_prefix ~/.node_modules
 
 fish_add_path ~/bin
 fish_add_path $GOPATH/bin
 fish_add_path /var/lib/snapd/snap/bin
 fish_add_path /.krew/bin
-fish_add_path /.node_modules/bin
+fish_add_path ~/.node_modules/bin
 fish_add_path /.local/bin
 fish_add_path /usr/local/kubebuilder/bin
 fish_add_path ~/.emacs.d/bin
+fish_add_path ~/.linuxbrew/bin
 
 alias k=kubectl
 alias t=terraform
@@ -33,4 +34,7 @@ end
 
 function brightness
     xrandr --output (xrandr -q | grep ' connected' | head -n 1 | cut -d ' ' -f1) --brightness $argv[1]
+end
+function docker-interface
+    ip l | grep (docker exec $argv cat /sys/class/net/eth0/iflink) | awk '{print $2}' | awk -F@ '{print $1}'
 end
