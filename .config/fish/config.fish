@@ -4,6 +4,7 @@ end
 
 set -gx GOPATH ~/go
 set -gx npm_config_prefix ~/.node_modules
+set -gx XDG_CONFIG_HOME ~/.config
 
 fish_add_path ~/bin
 fish_add_path $GOPATH/bin
@@ -14,6 +15,7 @@ fish_add_path /.local/bin
 fish_add_path /usr/local/kubebuilder/bin
 fish_add_path ~/.emacs.d/bin
 fish_add_path ~/.linuxbrew/bin
+fish_add_path /usr/local/go/bin
 
 alias k=kubectl
 alias t=terraform
@@ -37,4 +39,13 @@ function brightness
 end
 function docker-interface
     ip l | grep (docker exec $argv cat /sys/class/net/eth0/iflink) | awk '{print $2}' | awk -F@ '{print $1}'
+end
+
+
+function jwt-decode
+    echo -n $argv[1] | jq -R 'split(".") | .[1] | @base64d | fromjson'
+end
+
+function bluetooth-powerbeats-pro
+    bluetoothctl connect A4:83:E7:E6:48:65
 end
