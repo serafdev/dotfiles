@@ -16,6 +16,7 @@ fish_add_path /usr/local/kubebuilder/bin
 fish_add_path ~/.emacs.d/bin
 fish_add_path ~/.linuxbrew/bin
 fish_add_path /usr/local/go/bin
+fish_add_path ~/.cargo/bin
 
 alias k=kubectl
 alias t=terraform
@@ -25,6 +26,7 @@ alias watch="watch -n 0.2 "
 alias kev="oc get events --sort-by='.metadata.creationTimestamp'"
 alias kpr="kubectl get pods --field-selector=status.phase=Running"
 
+alias emacs="emacsclient -c"
 starship init fish | source
 
 alias python=python3
@@ -49,3 +51,25 @@ end
 function bluetooth-powerbeats-pro
     bluetoothctl connect A4:83:E7:E6:48:65
 end
+
+function displays-layout
+  switch $argv[1]
+    case help
+      echo "Current configs: home"
+    case home
+      xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x180 \
+        --output DP-1-2 --mode 2560x1440 --pos 1920x0
+  end
+  # Fix weird positioning after displays layout is changed
+  feh --randomize --bg-fill ~/Pictures/Wallpapers/*
+end
+
+alias _c="xclip -selection clipboard"
+alias _v="xclip -selection clipboard -o"
+
+function get-pass
+  bw get item $argv[1] | jq -r .login.password | xclip -selection clipboard
+  echo "Password copied to clipboard"
+end
+
+. $HOME/dotfiles-mariadb/.mariadb.profile

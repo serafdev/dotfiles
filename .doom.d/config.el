@@ -21,13 +21,13 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "IBM Plex Mono" :size 16 :weight 'Light))
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 13 :weight 'Light))
 
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-city-lights)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -69,10 +69,10 @@
 (add-to-list 'exec-path "$HOME/go/bin")
 
 ;;;
-(setq exec-path (append exec-path '("/home/seraf/go/bin")))
+(setq exec-path (append exec-path '("/home/fares-mariadb/go/bin")))
 (setq exec-path (append exec-path '("/usr/local/go/bin")))
 
-(setenv "GOPATH" "/home/seraf/go")
+(setenv "GOPATH" "/home/fares-mariadb/go")
 (setq-hook! 'web-mode-hook +format-with 'prettier-prettify)
 
 (menu-bar-mode -1)
