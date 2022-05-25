@@ -25,6 +25,8 @@ alias watch="watch -n 0.2 "
 
 alias kev="oc get events --sort-by='.metadata.creationTimestamp'"
 alias kpr="kubectl get pods --field-selector=status.phase=Running"
+alias kw="kubectl get workflows --sort-by=.metadata.creationTimestamp"
+alias kp="kubectl get pods --sort-by=.metadata.creationTimestamp"
 
 alias emacs="emacsclient -c"
 starship init fish | source
