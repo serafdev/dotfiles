@@ -73,6 +73,7 @@
 (setq exec-path (append exec-path '("/usr/local/go/bin")))
 
 (setenv "GOPATH" "/home/fares-mariadb/go")
+
 (setq-hook! 'web-mode-hook +format-with 'prettier-prettify)
 
-(menu-bar-mode -1)
+(menu-bar-mode 0)

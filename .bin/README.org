@@ -1,0 +1,8 @@
+* Some random scripts
+Folder to store scripts that don't need to belong anywhere
+
+** ln
+#+begin_src sh
+ln -s dotfiles/.bin $HOME/bin
+#+end_src
+

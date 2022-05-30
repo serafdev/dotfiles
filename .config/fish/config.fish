@@ -28,7 +28,6 @@ alias kpr="kubectl get pods --field-selector=status.phase=Running"
 alias kw="kubectl get workflows --sort-by=.metadata.creationTimestamp"
 alias kp="kubectl get pods --sort-by=.metadata.creationTimestamp"
 
-alias emacs="emacsclient -c"
 starship init fish | source
 
 alias python=python3
