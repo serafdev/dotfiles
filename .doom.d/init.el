@@ -177,5 +177,9 @@
        (default +bindings +smartparens)
 
        :os
-       macos               ; MacOS-specific commands
+       ;; macos               ; MacOS-specific commands
 )
+
+
+;; Remove the never-used top menu
+(menu-bar-mode 0)

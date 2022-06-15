@@ -3,6 +3,7 @@ function on_exit --on-event fish_exit
 end
 
 set -gx GOPATH ~/go
+set -gx GEM_HOME ~/gems
 set -gx npm_config_prefix ~/.node_modules
 set -gx XDG_CONFIG_HOME ~/.config
 
@@ -17,6 +18,7 @@ fish_add_path ~/.emacs.d/bin
 fish_add_path ~/.linuxbrew/bin
 fish_add_path /usr/local/go/bin
 fish_add_path ~/.cargo/bin
+fish_add_path ~/gems/bin
 
 alias k=kubectl
 alias t=terraform

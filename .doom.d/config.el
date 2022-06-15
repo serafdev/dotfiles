@@ -69,11 +69,10 @@
 (add-to-list 'exec-path "$HOME/go/bin")
 
 ;;;
-(setq exec-path (append exec-path '("/home/fares-mariadb/go/bin")))
+(setq exec-path (append exec-path '("/home/seraf/go/bin")))
 (setq exec-path (append exec-path '("/usr/local/go/bin")))
 
-(setenv "GOPATH" "/home/fares-mariadb/go")
+(setenv "GOPATH" "/home/seraf/go")
 
 (setq-hook! 'web-mode-hook +format-with 'prettier-prettify)
 
-(menu-bar-mode 0)
