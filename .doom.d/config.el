@@ -66,13 +66,14 @@
 
 (setq url-proxy-services '(("no_proxy" . "localhost")))
 
-(add-to-list 'exec-path "$HOME/go/bin")
-
-;;;
-(setq exec-path (append exec-path '("/home/seraf/go/bin")))
-(setq exec-path (append exec-path '("/usr/local/go/bin")))
-
 (setenv "GOPATH" "/home/seraf/go")
+(setenv "PATH"
+        (concat
+         "/usr/local/go/bin" path-separator
+         "/home/seraf/go/bin" path-separator
+         (getenv "GOPATH") path-separator
+         (getenv "PATH")))
 
 (setq-hook! 'web-mode-hook +format-with 'prettier-prettify)
 
+(doom-load-envvars-file "~/.doom.d/myenv")
