@@ -66,14 +66,4 @@
 
 (setq url-proxy-services '(("no_proxy" . "localhost")))
 
-(setenv "GOPATH" "/home/seraf/go")
-(setenv "PATH"
-        (concat
-         "/usr/local/go/bin" path-separator
-         "/home/seraf/go/bin" path-separator
-         (getenv "GOPATH") path-separator
-         (getenv "PATH")))
-
 (setq-hook! 'web-mode-hook +format-with 'prettier-prettify)
-
-(doom-load-envvars-file "~/.doom.d/myenv")

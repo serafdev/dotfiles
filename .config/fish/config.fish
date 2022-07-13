@@ -19,6 +19,7 @@ fish_add_path ~/.linuxbrew/bin
 fish_add_path /usr/local/go/bin
 fish_add_path ~/.cargo/bin
 fish_add_path ~/gems/bin
+fish_add_path ~/.screenlayout
 
 alias k=kubectl
 alias t=terraform
@@ -27,7 +28,7 @@ alias watch="watch -n 0.2 "
 
 alias kev="oc get events --sort-by='.metadata.creationTimestamp'"
 alias kpr="kubectl get pods --field-selector=status.phase=Running"
-alias kw="kubectl get workflows --sort-by=.metadata.creationTimestamp"
+alias kwf="kubectl get workflows --sort-by=.metadata.creationTimestamp"
 alias kp="kubectl get pods --sort-by=.metadata.creationTimestamp"
 
 starship init fish | source
@@ -75,4 +76,10 @@ function get-pass
   echo "Password copied to clipboard"
 end
 
+function kns
+  kubectl config set-context $(kubectl config current-context) --namespace=$1
+end
+
 . $HOME/dotfiles-mariadb/.mariadb.profile
+. $HOME/func/*.sh
+

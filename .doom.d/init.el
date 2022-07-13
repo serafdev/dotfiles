@@ -183,3 +183,12 @@
 
 ;; Remove the never-used top menu
 (menu-bar-mode 0)
+
+(setenv "GOPATH" "/home/seraf/go")
+(setenv "SHELL" "/usr/bin/fish")
+(setenv "PATH"
+        (concat
+         "/usr/local/go/bin" path-separator
+         "/home/seraf/go/bin" path-separator
+         (getenv "GOPATH") path-separator
+         (getenv "PATH")))
