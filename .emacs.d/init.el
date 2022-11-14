@@ -4,6 +4,10 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 
+(package-install 'use-package)
+(package-install 'exec-path-from-shell)
+
+(require 'use-package)
 (package-initialize)
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
@@ -23,6 +27,7 @@
 (cond
  ((string-equal system-type "darwin")
   (user/load-config "darwin")))
+
 
 ;; ================= Generic Languages Setup  =============
 
@@ -48,7 +53,6 @@
 (require 'lsp-mode)
 
 ;; ================ IDE Packages, and such ===============
-(package-install 'use-package)
 (require 'use-package)
 (use-package all-the-icons)
 

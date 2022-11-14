@@ -20,11 +20,14 @@ fish_add_path /usr/local/go/bin
 fish_add_path ~/.cargo/bin
 fish_add_path ~/gems/bin
 fish_add_path ~/.screenlayout
+# Make sure to clone flutter: git clone https://github.com/flutter/flutter.git -b stable
+fish_add_path ~/flutter/bin
 
 alias k=kubectl
 alias t=terraform
 
 alias watch="watch -n 0.2 "
+alias emacs="emacsclient -c -a 'emacs'"
 
 alias kev="oc get events --sort-by='.metadata.creationTimestamp'"
 alias kpr="kubectl get pods --field-selector=status.phase=Running"

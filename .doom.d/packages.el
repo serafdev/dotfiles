@@ -48,5 +48,8 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+;;
+;; https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org#package-management
 
 (package! vue-mode)
+(package! protobuf-mode)
