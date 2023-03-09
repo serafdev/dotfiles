@@ -80,3 +80,10 @@ apps are not started from a shell."
 						    ))))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
+
+(setq lsp-dart-sdk-dir "/usr/lib/dart")
+(setenv "PATH" (concat (getenv "PATH") ":/opt/flutter/bin"))
+(setq exec-path (append exec-path '("/opt/flutter/bin")))
+
+
+(defun iqama-el () (interactive) (message (shell-command-to-string "iqama")))
