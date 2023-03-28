@@ -1,9 +1,12 @@
+-- Change Compiler to gcc-12: https://github.com/nvim-neorg/tree-sitter-norg/issues/45#issuecomment-1380721580
+require("nvim-treesitter.install").compilers = { "gcc-12" }
+
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { 
 	  "c", "lua", "vim", "help", "query", "go",
 	  "javascript", "typescript", "html", "css",
-	  "bash",
+	  "bash", "norg", "python",
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
