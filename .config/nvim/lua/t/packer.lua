@@ -54,9 +54,16 @@ return require('packer').startup(function(use)
         }
     }
 
-    use { 'nvim-treesitter/nvim-treesitter' }
     use { 'nvim-orgmode/orgmode', config = function()
         require('orgmode').setup {}
     end
     }
+
+    use({
+        "andythigpen/nvim-coverage",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("coverage").setup()
+        end,
+    })
 end)
