@@ -58,7 +58,7 @@
  '(custom-safe-themes
    '("7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(package-selected-packages
-   '(evil-magit magit ivy-hydra counsel-projectile projectile hydra evil-collection evil general all-the-icons doom-themes helpful ivy-rich which-key rainbow-delimiters smart-mode-line doom-modeline counsel ivy command-log-mode exec-path-from-shell yasnippet lsp-ui company)))
+   '(company-lsp flycheck go-mode typescript-mode evil-magit magit ivy-hydra counsel-projectile projectile hydra evil-collection evil general all-the-icons doom-themes helpful ivy-rich which-key rainbow-delimiters smart-mode-line doom-modeline counsel ivy command-log-mode exec-path-from-shell yasnippet lsp-ui company)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -139,9 +139,9 @@
   :global-prefix "C-SPC"))
 
 (fb/leader-keys
-   "z" '(:ignore t :which-key "gui")
-   "zt" '(counsel-load-theme :which-key "choose theme")
-   "zs" '(hydra-text-scale/body :which-key "scale text"))
+   "z" '(:ignore t :which-key "واجهات")
+   "zt" '(counsel-load-theme :which-key "الألوان")
+   "zs" '(hydra-text-scale/body :which-key "تدرج"))
 
 (use-package evil
   :init
@@ -179,7 +179,7 @@
   :config
   (projectile-mode)
   (fb/leader-keys
-    "p" '(projectile-command-map :which-key "projectile"))
+    "p" '(projectile-command-map :which-key "قذيفة"))
   :custom ((projectile-completion-system 'ivy))
   :init
   (when (file-directory-p "~/Code")
@@ -189,9 +189,26 @@
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
-(use-package magit
-  :custom
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+(use-package magit)
 
-(use-package evil-magit
-  :after magit)
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration t))
+
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  :hook (typescript-mode . lsp-deferred)
+  :config
+  (setq typescript-indent-level 4))
+
+(use-package yasnippet)
+
+(use-package flycheck)
+
+(use-package go-mode
+  :hook ((go-mode . lsp-deferred)
+	 (before-save . lsp-format-buffer)
+	 (before-save . lsp-organize-imports)))

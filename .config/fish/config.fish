@@ -1,7 +1,3 @@
-function on_exit --on-event fish_exit
-    echo Exiting Fish...
-end
-
 set -gx GOPATH ~/go
 set -gx GEM_HOME ~/gems
 set -gx npm_config_prefix ~/.node_modules
