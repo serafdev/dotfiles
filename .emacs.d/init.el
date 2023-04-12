@@ -1,55 +1,36 @@
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+;; ================= OS Specifics ========================
+;; Load MacOS specifics. I wish to change to
+;; (user/load-config system-type) but gnu/linux has a slash in it.
+;; Maybe use a string split using the slash and name the file gnu?
+(cond
+ ((string-equal system-type "darwin")
+  (user/load-config "darwin")))
 
-;; Macos Keyboar settings
-(setq mac-option-key-is-meta nil)
-(setq mac-command-key-is-meta t)
-(setq mac-command-modifier 'meta)
-(setq mac-option-modifier nil)
+;; OS Specifics
+;;;;;;;;;;;; Packages load
+(defun user/load-config (config)
+  (load-library (concat "~/.emacs.d/configs/" config ".el")))
 
-;; Improve performance on MACOS for magit
-(setq magit-git-executable "/usr/bin/git")
+;; These can be looped but currently testing
+(user/load-config "interface")
+(user/load-config "language-servers")
+(user/load-config "magit")
+(user/load-config "evil")
+(user/load-config "hydra")
+(user/load-config "keybindings")
+(user/load-config "projectile")
 
-;; In Progress: Restarting config following @SystemCrafters Tutorial
-(setq inhibit-startup-message t)
+;; Should be, when commenting it's disabled (got to restart emacsdaemon)
+;; (modules
+;;   "interface"
+;;   "language-servers"
+;;   "magit"
+;;   ;; "evil"
+;;   "hydra"
+;;   "keybindings"
+;;   "projectile"
+;; )
 
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(set-fringe-mode 10)
-
-(menu-bar-mode -1)
-
-(setq visibile-bell t)
-
-(set-face-attribute 'default nil :font "IBM Plex Mono" :height 170)
-
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-(require 'package)
-
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
-
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
-
-(column-number-mode)
-(global-display-line-numbers-mode t)
-
-(dolist (mode '(org-mode-hook
-		term-mode-hook
-		eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0 ))))
-
-(use-package command-log-mode)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -66,149 +47,3 @@
  ;; If there is more than one, they won't work right.
  )
 
-(use-package ivy
-  :diminish
-  :bind (("C-s" . swiper)
-	 :map ivy-minibuffer-map
-	 ("TAB" . ivy-alt-done)
-	 ("C-l" . ivy-alt-done)
-	 ("C-j" . ivy-next-line)
-	 ("C-k" . ivy-previous-line)
-	 :map ivy-switch-buffer-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-l" . ivy-done)
-	 ("C-d" . ivy-switch-buffer-kill)
-	 :map ivy-reverse-i-search-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-d" . ivy-reverse-i-search-kill))
-  :config
-  (ivy-mode 1))
-
-(use-package counsel
-  :bind (("M-x" . counsel-M-x)
-	 ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file)
-  
-         :map minibuffer-local-map
-	 ("C-r" . 'counsel-minibuffer-history))
-  :config
-  (setq ivy-initial-inputs-alist nil))
-
-;; M-x all-the-icons-install-fonts
-(use-package all-the-icons)
-
-(use-package smart-mode-line
-  :config
-  (setq sml/theme 'dark)
-  (sml/setup))
-
-(use-package doom-themes)
-
-(load-theme 'doom-tomorrow-night)
-
-(global-command-log-mode t)
-
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-(use-package which-key
-  :init (which-key-mode)
-  :diminish which-key-mode
-  :config
-  (setq which-key-idle-delay 0.3))
-
-(use-package ivy-rich
-  :init
-  (ivy-rich-mode 1))
-
-(use-package helpful
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ([remap describe-function] . counsel-describe-function)
-  ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key))
-
-(use-package general
-  :config
-  (general-create-definer fb/leader-keys
-    :keymaps '(normal insert visual emacs)
-    :prefix "SPC"
-  :global-prefix "C-SPC"))
-
-(fb/leader-keys
-   "z" '(:ignore t :which-key "واجهات")
-   "zt" '(counsel-load-theme :which-key "الألوان")
-   "zs" '(hydra-text-scale/body :which-key "تدرج"))
-
-(use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
-  :config
-  (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-  (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
-
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
-
-(use-package hydra)
-(use-package ivy-hydra)
-
-(defhydra hydra-text-scale (:timeout 4)
-	  "scale text"
-	  ("j" text-scale-increase "in")
-	  ("k" text-scale-decrease "out")
-	  ("f" nil "finished" :exit t))
-
-(use-package projectile
-  :diminish projectile-mode
-  :config
-  (projectile-mode)
-  (fb/leader-keys
-    "p" '(projectile-command-map :which-key "قذيفة"))
-  :custom ((projectile-completion-system 'ivy))
-  :init
-  (when (file-directory-p "~/Code")
-    (setq projectile-project-search-path '("~/Code")))
-  (setq projectile-switch-project-action #'projectile-dired))
-
-(use-package counsel-projectile
-  :config (counsel-projectile-mode))
-
-(use-package magit)
-
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :config
-  (lsp-enable-which-key-integration t))
-
-(use-package typescript-mode
-  :mode "\\.ts\\'"
-  :hook (typescript-mode . lsp-deferred)
-  :config
-  (setq typescript-indent-level 4))
-
-(use-package yasnippet)
-
-(use-package flycheck)
-
-(use-package go-mode
-  :hook ((go-mode . lsp-deferred)
-	 (before-save . lsp-format-buffer)
-	 (before-save . lsp-organize-imports)))
