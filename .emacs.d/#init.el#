@@ -1,4 +1,6 @@
 ;; Load our defined functions
+
+
 (load-library "~/.emacs.d/configs/01-defs.el")
 
 ;; "Unix"
