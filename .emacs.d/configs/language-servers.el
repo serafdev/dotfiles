@@ -3,7 +3,10 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
-  (lsp-enable-which-key-integration t))
+  (lsp-enable-which-key-integration t)
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.vendor\\'")
+  (setq lsp-file-watch-threshold 200)
+  )
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
@@ -19,3 +22,6 @@
   :hook ((go-mode . lsp-deferred)
 	 (before-save . lsp-format-buffer)
 	 (before-save . lsp-organize-imports)))
+
+(use-package lsp-treemacs)
+(lsp-treemacs-sync-mode 1)

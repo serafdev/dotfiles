@@ -1,6 +1,5 @@
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
-
 ;; Macos Keyboar settings
 (setq mac-option-key-is-meta nil)
 (setq mac-command-key-is-meta t)

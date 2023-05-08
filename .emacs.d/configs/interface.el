@@ -9,7 +9,7 @@
 
 (setq visibile-bell t)
 
-(set-face-attribute 'default nil :font "IBM Plex Mono" :height 170)
+(set-face-attribute 'default nil :font "IBM Plex Mono" :height 130)
 
 (require 'package)
 
@@ -101,3 +101,14 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
+
+(use-package treemacs)
+(use-package treemacs-all-the-icons
+  :config
+  (treemacs-load-theme "all-the-icons"))
+
+(fb/leader-keys
+  "t" '(:ignore t :which-key "treemacs")
+  "tt" '(treemacs :which-key "toggle"))
+
+(use-package vterm)

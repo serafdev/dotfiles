@@ -1,0 +1,5 @@
+{
+    "explorer.confirmDelete": false,
+    "workbench.settings.openDefaultKeybindings": true,
+    "redhat.telemetry.enabled": false
+}

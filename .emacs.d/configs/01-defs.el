@@ -7,3 +7,4 @@
   (while list
     (load-config (car list))
     (setq list (cdr list))))
+
