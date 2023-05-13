@@ -15,13 +15,12 @@
 
 ;; These can be looped but currently testing
 (toad!
- '(
-   "keybindings"
+ '("keybindings"
    "interface"
-   "hydra"
    "language-servers"
    "magit"
    "evil"
+   "hydra"
    "projectile"))
 
 (custom-set-variables

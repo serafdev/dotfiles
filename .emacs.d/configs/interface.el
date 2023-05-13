@@ -102,6 +102,7 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
+<<<<<<< HEAD
 (use-package treemacs)
 (use-package treemacs-all-the-icons
   :config
@@ -111,4 +112,6 @@
   "t" '(:ignore t :which-key "treemacs")
   "tt" '(treemacs :which-key "toggle"))
 
+=======
+>>>>>>> fd64efb (feat: add youtube download script used on mediaserver)
 (use-package vterm)
