@@ -1,6 +1,0 @@
-#!/bin/bash
-
-echo Using https://github.com/ytdl-org/youtube-dl
-echo python3 $HOME/youtube-dl/youtube_dl/__main__.py -f bestvideo+bestaudio $1
-
-python3 $HOME/youtube-dl/youtube_dl/__main__.py -f bestvideo+bestaudio $1

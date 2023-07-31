@@ -100,6 +100,11 @@ function kns
   kubectl config set-context $(kubectl config current-context) --namespace=$1
 end
 
+function wifi_connect
+    echo "running: sudo nmcli --ask dev wifi connect $argv[1]"
+    echo "Note: if any issue arises, try: nmcli con delete $argv[1]"
+    sudo nmcli --ask  dev wifi connect $argv[1]
+end
 
 . $HOME/func/*.sh
 

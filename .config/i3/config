@@ -41,7 +41,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec konsole
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -183,5 +183,5 @@ bar {
         status_command i3status
 }
 
-exec --no-startup-id feh --randomize --bg-fill ~/Pictures/Wallpapers/*
 exec --no-startup-id xcompmgr -c -l0 -t0 -r0 -o.00
+exec --no-startup-id /usr/bin/feh --randomize --bg-fill ~/Pictures/Wallpapers/*
