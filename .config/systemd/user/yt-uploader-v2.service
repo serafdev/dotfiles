@@ -1,0 +1,13 @@
+[Unit]
+Description=Youtube Uploader
+Documentation=Find Youtube Uploader's Documentation on https://ccil-kbw.com
+
+[Service]
+Type=simple
+TimeoutSec=0
+ExecStart=/usr/local/bin/yt-uploader-v2
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+
