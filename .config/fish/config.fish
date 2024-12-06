@@ -2,6 +2,7 @@ set -gx GOPATH ~/go
 set -gx GEM_HOME ~/gems
 set -gx npm_config_prefix ~/.node_modules
 set -gx XDG_CONFIG_HOME ~/.config
+set -gx ANDROID_HOME /home/seraf/Android/Sdk
 
 fish_add_path ~/bin
 fish_add_path $GOPATH/bin
@@ -17,6 +18,7 @@ fish_add_path ~/.cargo/bin
 fish_add_path ~/gems/bin
 fish_add_path ~/.screenlayout
 fish_add_path /opt/platform-tools
+fish_add_path /home/seraf/Android/Sdk/platform-tools
 # Make sure to clone flutter: git clone https://github.com/flutter/flutter.git -b stable
 fish_add_path /opt/flutter/bin
 
@@ -108,3 +110,14 @@ end
 
 . $HOME/func/*.sh
 
+kubectl completion fish | source
+
+# Generated for envman. Do not edit.
+test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
+
+# pnpm
+set -gx PNPM_HOME "/home/seraf/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end

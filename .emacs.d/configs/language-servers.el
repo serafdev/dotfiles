@@ -23,5 +23,9 @@
 	 (before-save . lsp-format-buffer)
 	 (before-save . lsp-organize-imports)))
 
+(use-package copilot
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+  :ensure t)
+
 (use-package lsp-treemacs)
 (lsp-treemacs-sync-mode 1)
