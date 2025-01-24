@@ -22,5 +22,5 @@ fish_add_path ~/.screenlayout
 fish_add_path /opt/platform-tools
 fish_add_path /home/seraf/Android/Sdk/platform-tools
 # Make sure to clone flutter: git clone https://github.com/flutter/flutter.git -b stable
-fish_add_path /opt/flutter/bin
+fish_add_path ~/development/flutter/bin
 fish_add_path ~/.poetry/bin

@@ -23,7 +23,7 @@ function wg_connect_random
     end
 
     # Get a random file from the folder with the `.conf` extension
-    set wg_files (find $wg_folder -type f -name '*.conf')
+    set wg_files (sudo find $wg_folder -type f -name '*.conf')
     if test -z "$wg_files"
         echo "No configuration files found in $wg_folder"
         return 1
