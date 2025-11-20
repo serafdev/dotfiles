@@ -16,17 +16,25 @@ function adhan
         # Get hijri date
         set hijri_date (echo $response | jq -r '.data.date.hijri | "\(.day) \(.month.en) \(.year)"')
 
+        # System info
+        set cpu_usage (top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}' 2>/dev/null || echo "N/A")
+        set mem_info (free -h | awk '/^Mem:/ {print $3 "/" $2}' 2>/dev/null || echo "N/A")
+        set disk_usage (df -h / | awk 'NR==2 {print $3 "/" $2 " (" $5 ")"}' 2>/dev/null || echo "N/A")
+        set uptime_info (uptime -p 2>/dev/null | sed 's/up //' || echo "N/A")
+        set kernel_info (uname -r 2>/dev/null || echo "N/A")
+        set load_avg (uptime | awk -F'load average:' '{print $2}' | sed 's/^[ \t]*//' 2>/dev/null || echo "N/A")
+
         echo ""
-        echo "╭──────────────────────────────────────╮"
-        echo "│  🕌  Prayer Times - Laval, QC        │"
-        echo "│                                      │"
+        echo "╭─────────────────────────────────────────────────────────────────╮"
+        echo "│  🕌  Prayer Times - Laval, QC                                   │"
+        echo "├─────────────────────────────────────────────────────────────────┤"
 
         echo $response | jq -r '
             .data.timings |
-            "│     🌙 Fajr     \(.Fajr)              │\n│     🌅 Sunrise  \(.Sunrise)              │\n│     ☀️  Dhuhr    \(.Dhuhr)              │\n│     🌤️  Asr      \(.Asr)              │\n│     🌆 Maghrib  \(.Maghrib)              │\n│     🌃 Isha     \(.Isha)              │"
+            "│  🌙 Fajr       \(.Fajr)  │  🌅 Sunrise    \(.Sunrise)              │\n│  ☀️  Dhuhr      \(.Dhuhr)  │  🌤️  Asr        \(.Asr)              │\n│  🌆 Maghrib    \(.Maghrib)  │  🌃 Isha       \(.Isha)              │"
         '
 
-        echo "│                                      │"
+        echo "├─────────────────────────────────────────────────────────────────┤"
 
         # Calculate time until next prayer
         set next_prayer_info (echo $response | jq -r --arg current "$current_time" '
@@ -42,23 +50,29 @@ function adhan
         if test -n "$next_prayer_info"
             set prayer_name (echo $next_prayer_info | cut -d'|' -f1)
             set prayer_time (echo $next_prayer_info | cut -d'|' -f2)
-
-            # Calculate time difference
             set prayer_epoch (date -d "$prayer_time" +%s 2>/dev/null)
             if test $status -eq 0
                 set diff_seconds (math $prayer_epoch - $current_epoch)
                 set hours (math "floor($diff_seconds / 3600)")
                 set minutes (math "floor(($diff_seconds % 3600) / 60)")
-
                 if test $hours -gt 0
-                    printf "│  ⏰ Next: %-7s in %dh %dm         │\n" "$prayer_name" $hours $minutes
+                    printf "│  ⏰ Next Prayer: %-8s in %dh %dm                            │\n" "$prayer_name" $hours $minutes
                 else
-                    printf "│  ⏰ Next: %-7s in %dm             │\n" "$prayer_name" $minutes
+                    printf "│  ⏰ Next Prayer: %-8s in %dm                               │\n" "$prayer_name" $minutes
                 end
             end
         end
 
-        echo "╰──────────────────────────────────────╯"
+        echo "├─────────────────────────────────────────────────────────────────┤"
+        echo "│  💻  System Dashboard                                           │"
+        echo "├─────────────────────────────────────────────────────────────────┤"
+        printf "│  🖥️  CPU Usage    %-46s│\n" "$cpu_usage"
+        printf "│  🧠 Memory       %-46s│\n" "$mem_info"
+        printf "│  💾 Disk         %-46s│\n" "$disk_usage"
+        printf "│  ⏱️  Uptime       %-46s│\n" "$uptime_info"
+        printf "│  🐧 Kernel       %-46s│\n" "$kernel_info"
+        printf "│  📊 Load Avg     %-46s│\n" "$load_avg"
+        echo "╰─────────────────────────────────────────────────────────────────╯"
         echo ""
     else
         echo "❌ Error fetching prayer times"
