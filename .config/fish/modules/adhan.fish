@@ -24,16 +24,24 @@ function adhan
         set kernel_info (uname -r 2>/dev/null || echo "N/A")
         set load_avg (uptime | awk -F'load average:' '{print $2}' | sed 's/^[ \t]*//' 2>/dev/null || echo "N/A")
 
+        # Extract prayer times
+        set fajr (echo $response | jq -r '.data.timings.Fajr')
+        set sunrise (echo $response | jq -r '.data.timings.Sunrise')
+        set dhuhr (echo $response | jq -r '.data.timings.Dhuhr')
+        set asr (echo $response | jq -r '.data.timings.Asr')
+        set maghrib (echo $response | jq -r '.data.timings.Maghrib')
+        set isha (echo $response | jq -r '.data.timings.Isha')
+
         echo ""
         echo "╭─────────────────────────────────────────────────────────────────╮"
         echo "│  🕌  Prayer Times - Laval, QC                                   │"
         echo "├─────────────────────────────────────────────────────────────────┤"
-
-        echo $response | jq -r '
-            .data.timings |
-            "│  🌙 Fajr       \(.Fajr)  │  🌅 Sunrise    \(.Sunrise)              │\n│  ☀️  Dhuhr      \(.Dhuhr)  │  🌤️  Asr        \(.Asr)              │\n│  🌆 Maghrib    \(.Maghrib)  │  🌃 Isha       \(.Isha)              │"
-        '
-
+        string pad -w 65 "│  🌙 Fajr       $fajr" | string replace -r '\s*$' ' │'
+        string pad -w 65 "│  🌅 Sunrise    $sunrise" | string replace -r '\s*$' ' │'
+        string pad -w 65 "│  ☀️  Dhuhr      $dhuhr" | string replace -r '\s*$' ' │'
+        string pad -w 65 "│  🌤️  Asr        $asr" | string replace -r '\s*$' ' │'
+        string pad -w 65 "│  🌆 Maghrib    $maghrib" | string replace -r '\s*$' ' │'
+        string pad -w 65 "│  🌃 Isha       $isha" | string replace -r '\s*$' ' │'
         echo "├─────────────────────────────────────────────────────────────────┤"
 
         # Calculate time until next prayer
