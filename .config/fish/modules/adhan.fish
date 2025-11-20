@@ -4,8 +4,10 @@ function adhan
     set longitude -73.7124
     set method 2  # ISNA (Islamic Society of North America) - recommended for North America
 
-    # Get current date
+    # Get current date and time
     set today (date +%d-%m-%Y)
+    set current_time (date +%H:%M)
+    set current_epoch (date +%s)
 
     # Fetch prayer times from aladhan API
     set response (curl -s "http://api.aladhan.com/v1/timings/$today?latitude=$latitude&longitude=$longitude&method=$method")
@@ -15,6 +17,36 @@ function adhan
             .data.timings |
             "🕌 Fajr \(.Fajr) • Dhuhr \(.Dhuhr) • Asr \(.Asr) • Maghrib \(.Maghrib) • Isha \(.Isha)"
         '
+
+        # Calculate time until next prayer
+        set next_prayer_info (echo $response | jq -r --arg current "$current_time" '
+            .data.timings |
+            to_entries |
+            map(select(.key | IN("Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"))) |
+            map({key: .key, value: .value}) |
+            map(select(.value > $current)) |
+            first |
+            "\(.key)|\(.value)"
+        ')
+
+        if test -n "$next_prayer_info"
+            set prayer_name (echo $next_prayer_info | cut -d'|' -f1)
+            set prayer_time (echo $next_prayer_info | cut -d'|' -f2)
+
+            # Calculate time difference
+            set prayer_epoch (date -d "$prayer_time" +%s 2>/dev/null)
+            if test $status -eq 0
+                set diff_seconds (math $prayer_epoch - $current_epoch)
+                set hours (math "floor($diff_seconds / 3600)")
+                set minutes (math "floor(($diff_seconds % 3600) / 60)")
+
+                if test $hours -gt 0
+                    echo "⏰ $prayer_name in "$hours"h "$minutes"m"
+                else
+                    echo "⏰ $prayer_name in "$minutes"m"
+                end
+            end
+        end
     else
         echo "❌ Error fetching prayer times"
         return 1
