@@ -11,6 +11,26 @@ function adhan
     set response (curl -s "http://api.aladhan.com/v1/timings/$today?latitude=$latitude&longitude=$longitude&method=$method")
 
     if test $status -eq 0
+        echo $response | jq -r '
+            .data.timings |
+            "🕌 Fajr \(.Fajr) • Dhuhr \(.Dhuhr) • Asr \(.Asr) • Maghrib \(.Maghrib) • Isha \(.Isha)"
+        '
+    else
+        echo "❌ Error fetching prayer times"
+        return 1
+    end
+end
+
+function adhan_verbose
+    # Verbose version with full details
+    set latitude 45.6066
+    set longitude -73.7124
+    set method 2
+    set today (date +%d-%m-%Y)
+
+    set response (curl -s "http://api.aladhan.com/v1/timings/$today?latitude=$latitude&longitude=$longitude&method=$method")
+
+    if test $status -eq 0
         echo "🕌 Prayer Times for Laval, Québec - $today"
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
