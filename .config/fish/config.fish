@@ -1,11 +1,16 @@
 set config_dir (dirname (status --current-filename))
 
-source "$config_dir/modules/path.fish"
-source "$config_dir/modules/aliases.fish"
-source "$config_dir/modules/k8s.fish"
-source "$config_dir/modules/desktop.fish"
-source "$config_dir/modules/bitwarden.fish"
-source "$config_dir/modules/network.fish"
-source "$config_dir/modules/misc.fish"
-source "$config_dir/modules/package-managers.fish"
-source "$config_dir/modules/starship.fish"
+set modules \
+    path \
+    aliases \
+    k8s \
+    desktop \
+    bitwarden \
+    network \
+    misc \
+    package-managers \
+    starship
+
+for module in $modules
+    source "$config_dir/modules/$module.fish"
+end
