@@ -1,5 +1,3 @@
-echo "k8s.fish module loaded."
-
 alias k=kubectl
 
 alias kev="oc get events --sort-by='.metadata.creationTimestamp'"

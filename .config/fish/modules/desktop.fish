@@ -1,5 +1,3 @@
-echo "desktop.fish module loaded."
-
 alias emacs="emacsclient -c -a 'emacs'"
 
 starship init fish | source

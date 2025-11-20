@@ -1,5 +1,3 @@
-echo "path.fish module loaded."
-
 set -gx GOPATH ~/go
 set -gx GEM_HOME ~/gems
 set -gx npm_config_prefix ~/.node_modules
