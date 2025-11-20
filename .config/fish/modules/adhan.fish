@@ -77,3 +77,6 @@ function adhan_next
         return 1
     end
 end
+
+# Display prayer times on shell startup
+adhan
