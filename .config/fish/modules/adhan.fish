@@ -13,10 +13,20 @@ function adhan
     set response (curl -s "http://api.aladhan.com/v1/timings/$today?latitude=$latitude&longitude=$longitude&method=$method")
 
     if test $status -eq 0
+        # Get hijri date
+        set hijri_date (echo $response | jq -r '.data.date.hijri | "\(.day) \(.month.en) \(.year)"')
+
+        echo ""
+        echo "╭──────────────────────────────────────╮"
+        echo "│  🕌  Prayer Times - Laval, QC        │"
+        echo "│                                      │"
+
         echo $response | jq -r '
             .data.timings |
-            "🕌 Fajr \(.Fajr) • Dhuhr \(.Dhuhr) • Asr \(.Asr) • Maghrib \(.Maghrib) • Isha \(.Isha)"
+            "│     🌙 Fajr     \(.Fajr)              │\n│     🌅 Sunrise  \(.Sunrise)              │\n│     ☀️  Dhuhr    \(.Dhuhr)              │\n│     🌤️  Asr      \(.Asr)              │\n│     🌆 Maghrib  \(.Maghrib)              │\n│     🌃 Isha     \(.Isha)              │"
         '
+
+        echo "│                                      │"
 
         # Calculate time until next prayer
         set next_prayer_info (echo $response | jq -r --arg current "$current_time" '
@@ -41,38 +51,64 @@ function adhan
                 set minutes (math "floor(($diff_seconds % 3600) / 60)")
 
                 if test $hours -gt 0
-                    echo "⏰ $prayer_name in "$hours"h "$minutes"m"
+                    printf "│  ⏰ Next: %-7s in %dh %dm         │\n" "$prayer_name" $hours $minutes
                 else
-                    echo "⏰ $prayer_name in "$minutes"m"
+                    printf "│  ⏰ Next: %-7s in %dm             │\n" "$prayer_name" $minutes
                 end
             end
         end
+
+        echo "╰──────────────────────────────────────╯"
+        echo ""
     else
         echo "❌ Error fetching prayer times"
         return 1
     end
 end
 
-function adhan_verbose
-    # Verbose version with full details
+function adhan_simple
+    # Simple compact version
     set latitude 45.6066
     set longitude -73.7124
     set method 2
     set today (date +%d-%m-%Y)
+    set current_time (date +%H:%M)
+    set current_epoch (date +%s)
 
     set response (curl -s "http://api.aladhan.com/v1/timings/$today?latitude=$latitude&longitude=$longitude&method=$method")
 
     if test $status -eq 0
-        echo "🕌 Prayer Times for Laval, Québec - $today"
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-
         echo $response | jq -r '
             .data.timings |
-            "Fajr:    \(.Fajr)\nSunrise: \(.Sunrise)\nDhuhr:   \(.Dhuhr)\nAsr:     \(.Asr)\nMaghrib: \(.Maghrib)\nIsha:    \(.Isha)"
+            "🕌 Fajr \(.Fajr) • Dhuhr \(.Dhuhr) • Asr \(.Asr) • Maghrib \(.Maghrib) • Isha \(.Isha)"
         '
 
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo "Method: ISNA (Islamic Society of North America)"
+        set next_prayer_info (echo $response | jq -r --arg current "$current_time" '
+            .data.timings |
+            to_entries |
+            map(select(.key | IN("Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"))) |
+            map({key: .key, value: .value}) |
+            map(select(.value > $current)) |
+            first |
+            "\(.key)|\(.value)"
+        ')
+
+        if test -n "$next_prayer_info"
+            set prayer_name (echo $next_prayer_info | cut -d'|' -f1)
+            set prayer_time (echo $next_prayer_info | cut -d'|' -f2)
+            set prayer_epoch (date -d "$prayer_time" +%s 2>/dev/null)
+            if test $status -eq 0
+                set diff_seconds (math $prayer_epoch - $current_epoch)
+                set hours (math "floor($diff_seconds / 3600)")
+                set minutes (math "floor(($diff_seconds % 3600) / 60)")
+
+                if test $hours -gt 0
+                    echo "⏰ $prayer_name in "$hours"h "$minutes"m"
+                else
+                    echo "⏰ $prayer_name in "$minutes"m"
+                end
+            end
+        end
     else
         echo "❌ Error fetching prayer times"
         return 1
