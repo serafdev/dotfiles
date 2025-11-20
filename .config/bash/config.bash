@@ -4,10 +4,17 @@
 _bash_config_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 modules=(
+    env
+    path
+    aliases
     helpers
     fzf
     k8s
-    env
+    desktop
+    bitwarden
+    docker
+    misc
+    starship
 )
 
 for _module in "${modules[@]}"
@@ -15,6 +22,4 @@ do
     # shellcheck source=/dev/null (ignore the lsp shellcheck)
     source "$_bash_config_dir/modules/$_module.bash"
 done
-
-eval "$(starship init bash)"
 
