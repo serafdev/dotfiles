@@ -32,18 +32,6 @@ function adhan
         set maghrib (echo $response | jq -r '.data.timings.Maghrib')
         set isha (echo $response | jq -r '.data.timings.Isha')
 
-        echo ""
-        echo "╭─────────────────────────────────────────────────────────────────╮"
-        echo "│  🕌  Prayer Times - Laval, QC                                   │"
-        echo "├─────────────────────────────────────────────────────────────────┤"
-        string pad -w 65 "│  🌙 Fajr       $fajr" | string replace -r '\s*$' ' │'
-        string pad -w 65 "│  🌅 Sunrise    $sunrise" | string replace -r '\s*$' ' │'
-        string pad -w 65 "│  ☀️  Dhuhr      $dhuhr" | string replace -r '\s*$' ' │'
-        string pad -w 65 "│  🌤️  Asr        $asr" | string replace -r '\s*$' ' │'
-        string pad -w 65 "│  🌆 Maghrib    $maghrib" | string replace -r '\s*$' ' │'
-        string pad -w 65 "│  🌃 Isha       $isha" | string replace -r '\s*$' ' │'
-        echo "├─────────────────────────────────────────────────────────────────┤"
-
         # Calculate time until next prayer
         set next_prayer_info (echo $response | jq -r --arg current "$current_time" '
             .data.timings |
@@ -55,6 +43,7 @@ function adhan
             "\(.key)|\(.value)"
         ')
 
+        set next_prayer_text ""
         if test -n "$next_prayer_info"
             set prayer_name (echo $next_prayer_info | cut -d'|' -f1)
             set prayer_time (echo $next_prayer_info | cut -d'|' -f2)
@@ -64,23 +53,44 @@ function adhan
                 set hours (math "floor($diff_seconds / 3600)")
                 set minutes (math "floor(($diff_seconds % 3600) / 60)")
                 if test $hours -gt 0
-                    printf "│  ⏰ Next Prayer: %-8s in %dh %dm                            │\n" "$prayer_name" $hours $minutes
+                    set next_prayer_text "$prayer_name in $hours"h" $minutes"m
                 else
-                    printf "│  ⏰ Next Prayer: %-8s in %dm                               │\n" "$prayer_name" $minutes
+                    set next_prayer_text "$prayer_name in $minutes"m
                 end
             end
         end
 
-        echo "├─────────────────────────────────────────────────────────────────┤"
-        echo "│  💻  System Dashboard                                           │"
-        echo "├─────────────────────────────────────────────────────────────────┤"
-        printf "│  🖥️  CPU Usage    %-46s│\n" "$cpu_usage"
-        printf "│  🧠 Memory       %-46s│\n" "$mem_info"
-        printf "│  💾 Disk         %-46s│\n" "$disk_usage"
-        printf "│  ⏱️  Uptime       %-46s│\n" "$uptime_info"
-        printf "│  🐧 Kernel       %-46s│\n" "$kernel_info"
-        printf "│  📊 Load Avg     %-46s│\n" "$load_avg"
-        echo "╰─────────────────────────────────────────────────────────────────╯"
+        echo ""
+        set_color -o cyan
+        echo "  ╔═══════════════════════════════════════════════════════════╗"
+        echo "  ║                    🕌  PRAYER TIMES                       ║"
+        echo "  ║                   Laval, Québec                           ║"
+        echo "  ╚═══════════════════════════════════════════════════════════╝"
+        set_color normal
+        echo ""
+        echo "     🌙  Fajr       $fajr          🌅  Sunrise    $sunrise"
+        echo "     ☀️   Dhuhr      $dhuhr          🌤️   Asr        $asr"
+        echo "     🌆  Maghrib    $maghrib          🌃  Isha       $isha"
+        echo ""
+        if test -n "$next_prayer_text"
+            set_color -o yellow
+            echo "     ⏰  Next: $next_prayer_text"
+            set_color normal
+            echo ""
+        end
+
+        set_color -o magenta
+        echo "  ╔═══════════════════════════════════════════════════════════╗"
+        echo "  ║                   💻  SYSTEM STATS                        ║"
+        echo "  ╚═══════════════════════════════════════════════════════════╝"
+        set_color normal
+        echo ""
+        echo "     🖥️   CPU        $cpu_usage"
+        echo "     🧠  Memory     $mem_info"
+        echo "     💾  Disk       $disk_usage"
+        echo "     ⏱️   Uptime     $uptime_info"
+        echo "     🐧  Kernel     $kernel_info"
+        echo "     📊  Load       $load_avg"
         echo ""
     else
         echo "❌ Error fetching prayer times"
