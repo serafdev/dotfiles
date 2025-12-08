@@ -9,6 +9,7 @@ fish_add_path $GOPATH/bin
 fish_add_path /var/lib/snapd/snap/bin
 fish_add_path /.krew/bin
 fish_add_path ~/.node_modules/bin
+fish_add_path ~/.npm-global/bin
 fish_add_path /.local/bin
 fish_add_path /usr/local/kubebuilder/bin
 fish_add_path ~/.emacs.d/bin

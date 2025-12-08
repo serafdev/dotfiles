@@ -1,12 +1,6 @@
-require('orgmode').setup_ts_grammar()
+-- require('orgmode').setup_ts_grammar() -- Deprecated in newer versions
 
-require('nvim-treesitter.configs').setup {
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { 'org' },
-    },
-    ensure_installed = { 'org' },
-}
+-- Orgmode treesitter config moved to main treesitter config
 
 require('orgmode').setup({
     org_agenda_files = { '~/org/**/*' },

@@ -24,11 +24,11 @@ SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrbl
 SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
 SETUVAR fish_color_valid_path:\x2d\x2dunderline
-SETUVAR fish_greeting:Welcome\x20to\x20fish\x2c\x20the\x20friendly\x20interactive\x20shell\x0aType\x20\x60help\x60\x20for\x20instructions\x20on\x20how\x20to\x20use\x20fish
+SETUVAR fish_greeting:\x1d
 SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_pager_color_completion:\x1d
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/home/seraf/development/flutter/bin\x1e/home/seraf/Android/Sdk/platform\x2dtools\x1e/home/seraf/\x2erubies/ruby\x2d3\x2e1\x2e4/bin\x1e/opt/platform\x2dtools\x1e/opt/flutter/bin\x1e/opt/android\x2dstudio/bin\x1e/home/seraf/flutter/bin\x1e/home/seraf/\x2escreenlayout\x1e/home/seraf/gems/bin\x1e/home/seraf/\x2epoetry/bin\x1e/home/seraf/\x2ecargo/bin\x1e/home/seraf/bin\x1e/usr/local/go/bin\x1e/home/seraf/\x2elinuxbrew/bin\x1e/home/seraf/\x2enode_modules/bin\x1e/home/seraf/go/bin\x1e/home/seraf/\x2eemacs\x2ed/bin\x1e/usr/local/kubebuilder/bin\x1e/home/seraf/Downloads/google\x2dcloud\x2dsdk/pkg/google\x2dcloud\x2dsdk/opt/google\x2dcloud\x2dsdk/bin\x1e/var/lib/snapd/snap/bin\x1e/home/seraf/\x2elocal/bin\x1e/home/seraf/\x2eyarn/bin
+SETUVAR fish_user_paths:/home/seraf/\x2enpm\x2dglobal/bin\x1e/home/seraf/development/flutter/bin\x1e/home/seraf/Android/Sdk/platform\x2dtools\x1e/home/seraf/\x2erubies/ruby\x2d3\x2e1\x2e4/bin\x1e/opt/platform\x2dtools\x1e/opt/flutter/bin\x1e/opt/android\x2dstudio/bin\x1e/home/seraf/flutter/bin\x1e/home/seraf/\x2escreenlayout\x1e/home/seraf/gems/bin\x1e/home/seraf/\x2epoetry/bin\x1e/home/seraf/\x2ecargo/bin\x1e/home/seraf/bin\x1e/usr/local/go/bin\x1e/home/seraf/\x2elinuxbrew/bin\x1e/home/seraf/\x2enode_modules/bin\x1e/home/seraf/go/bin\x1e/home/seraf/\x2eemacs\x2ed/bin\x1e/usr/local/kubebuilder/bin\x1e/home/seraf/Downloads/google\x2dcloud\x2dsdk/pkg/google\x2dcloud\x2dsdk/opt/google\x2dcloud\x2dsdk/bin\x1e/var/lib/snapd/snap/bin\x1e/home/seraf/\x2elocal/bin\x1e/home/seraf/\x2eyarn/bin

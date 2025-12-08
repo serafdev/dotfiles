@@ -1,4 +1,5 @@
 set config_dir (dirname (status --current-filename))
+set fish_greeting
 
 set modules \
     path \

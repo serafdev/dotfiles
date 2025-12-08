@@ -1,3 +1,6 @@
+alias emacs="emacsclient -c -a 'emacs'"
+
+starship init fish | source
 function zoomfix
     xcompmgr -c -l0 -t0 -r0 -o.00
 end
