@@ -10,7 +10,6 @@ set modules \
     network \
     misc \
     package-managers \
-    adhan \
     starship
 
 for module in $modules
